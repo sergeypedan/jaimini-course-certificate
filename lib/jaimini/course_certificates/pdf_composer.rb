@@ -16,10 +16,22 @@ module Jaimini
 
       RESOLUTION = 72
 
-      def initialize(meta:, bg_image: nil, bg_dpi: 300)
-        @meta     = meta
-        @bg_image = bg_image
-        @bg_dpi   = bg_dpi
+      FONT_SIZE = {
+        xlarge: 22,
+        large:  18,
+        normal: 13,
+        small:  8,
+        xsmall: 6
+      }
+
+
+      def initialize(meta:, bg_image: nil, bg_dpi: 300, certificate:, user:, course:)
+        @bg_dpi      = bg_dpi
+        @bg_image    = bg_image
+        @certificate = certificate
+        @course      = course
+        @meta        = meta
+        @user        = user
         validate!
       end
 
@@ -28,12 +40,48 @@ module Jaimini
           background:       @bg_image,
           background_scale: bg_scale,
           info:             @meta,
+          margin:           1.cm,
+          top_margin:       4.5.cm,
           page_layout:      :portrait,
           page_size:        "A5"
         )
-        pdf.text "Hello World"
+        pdf.font("assets/fonts/GentiumPlus-R.ttf")
+
+        pdf.font_size 26
+        pdf.text "Сертификат", align: :center, kerning: true
+
+        pdf.font_size 10
+        pdf.text "№ #{@certificate.uid}", align: :center, kerning: true
+
         pdf.move_down 5.mm
-        # pdf.font("/myfont.ttf")
+        pdf.font_size FONT_SIZE[:normal]
+        pdf.text "удостоверяет, что", align: :center, kerning: true
+
+        pdf.font_size FONT_SIZE[:xlarge]
+        pdf.text "#{@user.first_name} #{@user.last_name}", align: :center, kerning: true
+
+        pdf.move_down 5.mm
+        pdf.font_size FONT_SIZE[:normal]
+        pdf.text "успешно #{@user.gender == "male" ? "прошёл" : "прошла"} курс", align: :center, kerning: true
+
+        pdf.font_size FONT_SIZE[:large]
+        pdf.text "«#{@course.title}»", align: :center, kerning: true
+
+        pdf.font_size FONT_SIZE[:normal]
+        pdf.text "в школе ведической астрологии", align: :center, kerning: true
+
+        pdf.font_size 14
+        pdf.text "<link href=\"https://jaimini.ru\">Jaimini</a>", inline_format: true, align: :center, kerning: true
+
+        pdf.move_down 2.cm
+        pdf.font_size FONT_SIZE[:normal]
+        pdf.text "Сертификат выдан #{@certificate.issued_on.strftime("%-d %B %Y")}", align: :center, kerning: true
+
+        pdf.move_down 5.mm
+        pdf.font_size FONT_SIZE[:xsmall]
+        pdf.line_width = 0.3
+        url = "https://jaimini/certificates/#{@certificate.uid}"
+        pdf.text "Онлайн-версия сертификата находится по адресу\n<color rgb=\"#d5251e\"><link href=\"#{url}\">#{url}</link></color>", inline_format: true, align: :center, kerning: true
 
         pdf.encrypt_document(owner_password: :random, permissions: PERMISSIONS)
 

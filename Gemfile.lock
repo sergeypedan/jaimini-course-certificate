@@ -2,6 +2,8 @@ PATH
   remote: .
   specs:
     jaimini-course_certificates (0.1.0)
+      dry-schema
+      prawn
 
 GEM
   remote: https://rubygems.org/
@@ -72,7 +74,7 @@ DEPENDENCIES
   jaimini-course_certificates!
   prawn
   pry
-  rake (~> 10.0)
+  rake
   rspec (~> 3.0)
 
 BUNDLED WITH

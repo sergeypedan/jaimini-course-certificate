@@ -15,9 +15,9 @@ module Jaimini
 			#   define_method(key) do @params[key] end
 			# end
 
-			self::KEYS.each do |key|
-				define_method(key) do @params[key] end
-			end
+			# self::KEYS.each do |key|
+			# 	define_method(key) do @params[key] end
+			# end
 
 			def initialize(params)
 				@params = params.transform_keys { |key| key.to_sym rescue key }

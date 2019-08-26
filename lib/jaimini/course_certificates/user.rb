@@ -5,14 +5,18 @@ module Jaimini
 
 		class User < Jaimini::CourseCertificates::Record
 
-			KEYS = %i[first_name last_name]
+			KEYS = %i[first_name last_name gender]
 
 			SCHEMA = Dry::Schema.Params do
 									# required(:id).value(:integer, gt?: 0)
 									required(:first_name).filled(:string)
 									required(:last_name).filled(:string)
+                  required(:gender).filled(:string)
 								end
 
+      KEYS.each do |key|
+        define_method(key) do @params[key] end
+      end
 		end
 
 	end

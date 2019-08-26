@@ -7,7 +7,7 @@ RSpec.describe Jaimini::CourseCertificates::User do
 
   let(:first_name) { "Ivan" }
   let(:last_name) { "Grozny" }
-  let(:params) { { "first_name" => first_name, "last_name" => last_name } }
+  let(:params) { { "first_name" => first_name, "last_name" => last_name, "gender" => "male" } }
 
 
   shared_examples "valid instance setup" do
@@ -29,7 +29,7 @@ RSpec.describe Jaimini::CourseCertificates::User do
     end
 
     context "symbol keys" do
-      let(:params) { { first_name: "Ivan", last_name: "Grozny" } }
+      let(:params) { { first_name: "Ivan", last_name: "Grozny", gender: "male" } }
       it_behaves_like "valid instance setup"
     end
   end

@@ -5,12 +5,13 @@ module Jaimini
 		class PDFBuilder
 
 			def initialize(certificate:, course:, user:, pdf_meta:, background: { dpi: 300 })
+				validate_initial!(certificate, course, user)
 				@certificate = Jaimini::CourseCertificates::Certificate.new(certificate)
 				@course      = Jaimini::CourseCertificates::Course.new(course)
 				@user        = Jaimini::CourseCertificates::User.new(user)
 				@pdf_meta    = pdf_meta
 				@background  = background
-				validate!
+        validate!
 			end
 
 			def save_as_file(path: "certificate.pdf")
@@ -27,13 +28,22 @@ module Jaimini
 
 			def composer
 				@composer ||= PDFComposer.new(
-					meta:     @pdf_meta,
-					bg_image: @background[:image],
-					bg_dpi:   @background[:dpi]
+					meta:        @pdf_meta,
+					bg_image:    @background[:image],
+					bg_dpi:      @background[:dpi],
+          certificate: @certificate,
+          course:      @course,
+          user:        @user
 				)
 			end
 
 			private
+
+      def validate_initial!(certificate, course, user)
+        fail ArgumentError, "`certificate` must not be nil" unless certificate
+        fail ArgumentError, "`course` must not be nil"      unless course
+        fail ArgumentError, "`user` must not be nil"        unless user
+      end
 
 			def validate!
 				fail ArgumentError, "`certificate` must be a Jaimini::CourseCertificates::Certificate — you pass '#{@certificate.inspect}' (#{@certificate.class})" unless @certificate.is_a? Jaimini::CourseCertificates::Certificate

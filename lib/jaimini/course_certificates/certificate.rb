@@ -8,10 +8,13 @@ module Jaimini
 			KEYS = %i[uid issued_on]
 
 			SCHEMA = Dry::Schema.Params do
-									# required(:id).value(:integer, gt?: 0)
 									required(:uid).filled(:string)
 									required(:issued_on).value(:date)
 								end
+
+			KEYS.each do |key|
+				define_method(key) do @params[key] end
+			end
 
 		end
 

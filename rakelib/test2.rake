@@ -1,16 +1,14 @@
-desc "Tests PDF creation"
+desc "Tests PDF text"
 
-task :test_1 do
-  require "pry"
-
+task :test_2 do
   wd = "/Users/sergey/Downloads"
 
   certificate = { uid: "1023847103471", issued_on: Date.today }
-  user        = { first_name: "Sergey", last_name: "Pedan" }
-  course      = { slug: "blagokurs", title: "Благокурс" }
+  user        = { first_name: "Сергей", last_name: "Педан", gender: "male" }
+  course      = { slug: "blagokurs", title: "Курс астрологии «Предназначение»" }
   pdf_meta    = {
     Author:       "Анита Педан",
-    CreationDate: Time.now,
+    CreationDate: Date.today.strftime("%F"),
     Creator:      "Jaimini",
     Keywords:     "астрология васту джйотиш сертификат обучение курс",
     Producer:     "jaimini.ru website",
