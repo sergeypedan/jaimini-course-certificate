@@ -7,8 +7,7 @@ module Jaimini
 
 			KEYS = %i[first_name last_name gender]
 
-			SCHEMA = Dry::Schema.Params do
-									# required(:id).value(:integer, gt?: 0)
+			SCHEMA = Dry::Schema.define do
 									required(:first_name).filled(:string)
 									required(:last_name).filled(:string)
                   required(:gender).filled(:string)

@@ -5,9 +5,11 @@ module Jaimini
 
 		class Record
 
+      include DryHelpers
+
 			KEYS = %i[] # in children
 
-			SCHEMA = Dry::Schema.Params do
+			SCHEMA = Dry::Schema.define do
 							 end
 
 			# in children

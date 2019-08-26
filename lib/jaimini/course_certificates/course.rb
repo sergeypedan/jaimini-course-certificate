@@ -7,7 +7,7 @@ module Jaimini
 
 			# KEYS = %i[title slug]
 
-			SCHEMA = Dry::Schema.Params do
+			SCHEMA = Dry::Schema.define do
 									# required(:id).value(:integer, gt?: 0)
 									required(:title).filled(:string)
 									required(:slug).filled(:string)

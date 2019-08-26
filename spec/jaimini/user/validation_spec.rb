@@ -4,11 +4,7 @@ RSpec.describe Jaimini::CourseCertificates::User do
 
   subject { described_class.new(params) }
 
-
-  let(:first_name) { "Ivan" }
-  let(:last_name) { "Grozny" }
-  let(:params) { { "first_name" => first_name, "last_name" => last_name, "gender" => "male" } }
-
+  let(:params) { $user }
 
   shared_examples "valid instance setup" do
     it { is_expected.to be_a described_class }
@@ -25,11 +21,11 @@ RSpec.describe Jaimini::CourseCertificates::User do
 
   context "valid input" do
     context "string keys" do
+      let(:params) { { "first_name" => "Ivan", "last_name" => "Grozny", "gender" => "male" } }
       it_behaves_like "valid instance setup"
     end
 
     context "symbol keys" do
-      let(:params) { { first_name: "Ivan", last_name: "Grozny", gender: "male" } }
       it_behaves_like "valid instance setup"
     end
   end
@@ -46,10 +42,10 @@ RSpec.describe Jaimini::CourseCertificates::User do
       it_behaves_like "invalid instance setup"
     end
 
-    context "key lower than expected" do
-      let(:first_name) { 0 }
-      it_behaves_like "invalid instance setup"
-    end
+    # context "invalid type" do
+    #   let(:first_name) { 0 }
+    #   it_behaves_like "invalid instance setup"
+    # end
   end
 
 end

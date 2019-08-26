@@ -5,15 +5,39 @@ module Jaimini
 
 		class Certificate < Jaimini::CourseCertificates::Record
 
-			KEYS = %i[uid issued_on]
-
-			SCHEMA = Dry::Schema.Params do
+			SCHEMA =  Dry::Schema.define do
+									required(:course).filled(:hash)
+									required(:issued_on).filled(:date)
 									required(:uid).filled(:string)
-									required(:issued_on).value(:date)
+									required(:url).filled(:string)
+									required(:user).filled(:hash)
 								end
 
-			KEYS.each do |key|
-				define_method(key) do @params[key] end
+			def initialize(certificate_params)
+				@params = certificate_params.transform_keys { |key| key.to_sym rescue key }
+				@course = Jaimini::CourseCertificates::Course.new @params[:course]
+				@user   = Jaimini::CourseCertificates::User.new   @params[:user]
+				validate! @params
+			end
+
+			def course
+				@course
+			end
+
+			def issued_on
+				@params[:issued_on]
+			end
+
+			def uid
+				@params[:uid]
+			end
+
+			def url
+				@params[:url]
+			end
+
+			def user
+				@user
 			end
 
 		end
