@@ -5,9 +5,9 @@ module Jaimini
 		class PDFBuilder
 
 			def initialize(certificate:, course:, user:, pdf_meta:, background: { dpi: 300 })
-				@certificate = certificate
-				@course      = course
-				@user        = user
+				@certificate = Jaimini::CourseCertificates::Certificate.new(certificate)
+				@course      = Jaimini::CourseCertificates::Course.new(course)
+				@user        = Jaimini::CourseCertificates::User.new(user)
 				@pdf_meta    = pdf_meta
 				@background  = background
 				validate!

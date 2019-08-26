@@ -9,3 +9,8 @@ require "jaimini/course_certificates/course"
 require "jaimini/course_certificates/user"
 require "jaimini/course_certificates/pdf_composer"
 require "jaimini/course_certificates/pdf_builder"
+
+module Jaimini
+  module CourseCertificates
+  end
+end

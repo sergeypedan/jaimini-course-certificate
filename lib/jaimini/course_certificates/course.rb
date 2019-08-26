@@ -5,10 +5,10 @@ module Jaimini
 
 		class Course < Jaimini::CourseCertificates::Record
 
-			KEYS = %i[id title slug]
+			KEYS = %i[title slug]
 
 			SCHEMA = Dry::Schema.Params do
-									required(:id).value(:integer, gt?: 0)
+									# required(:id).value(:integer, gt?: 0)
 									required(:title).filled(:string)
 									required(:slug).filled(:string)
 								end

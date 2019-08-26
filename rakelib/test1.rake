@@ -3,11 +3,11 @@ desc "Tests PDF creation"
 task :test_1 do
   require "pry"
 
-  wd = "/Users/sergey/Downloads/"
+  wd = "/Users/sergey/Downloads"
 
-  certificate = Jaimini::CourseCertificates::Certificate.new({ id: 5, uid: "1023847103471", issued_on: Date.today })
-  user        = Jaimini::CourseCertificates::User.new({ id: 5, first_name: "Sergey", last_name: "Pedan" })
-  course      = Jaimini::CourseCertificates::Course.new({ id: 5, slug: "blagokurs", title: "Благокурс" })
+  certificate = Jaimini::CourseCertificates::Certificate.new({ uid: "1023847103471", issued_on: Date.today })
+  user        = Jaimini::CourseCertificates::User.new({ first_name: "Sergey", last_name: "Pedan" })
+  course      = Jaimini::CourseCertificates::Course.new({ slug: "blagokurs", title: "Благокурс" })
   pdf_meta    = {
     Author:       "Анита Педан",
     CreationDate: Time.now,

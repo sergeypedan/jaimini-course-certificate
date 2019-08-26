@@ -5,10 +5,10 @@ module Jaimini
 
 		class Certificate < Jaimini::CourseCertificates::Record
 
-			KEYS = %i[id uid issued_on]
+			KEYS = %i[uid issued_on]
 
 			SCHEMA = Dry::Schema.Params do
-									required(:id).value(:integer, gt?: 0)
+									# required(:id).value(:integer, gt?: 0)
 									required(:uid).filled(:string)
 									required(:issued_on).value(:date)
 								end
