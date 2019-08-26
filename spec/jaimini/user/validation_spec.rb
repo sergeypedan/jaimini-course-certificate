@@ -5,10 +5,9 @@ RSpec.describe Jaimini::CourseCertificates::User do
   subject { described_class.new(params) }
 
 
-  let(:id) { 5 }
   let(:first_name) { "Ivan" }
   let(:last_name) { "Grozny" }
-  let(:params) { { "id" => id, "first_name" => first_name, "last_name" => last_name } }
+  let(:params) { { "first_name" => first_name, "last_name" => last_name } }
 
 
   shared_examples "valid instance setup" do
@@ -30,7 +29,7 @@ RSpec.describe Jaimini::CourseCertificates::User do
     end
 
     context "symbol keys" do
-      let(:params) { { id: 5, first_name: "Ivan", last_name: "Grozny" } }
+      let(:params) { { first_name: "Ivan", last_name: "Grozny" } }
       it_behaves_like "valid instance setup"
     end
   end
@@ -38,22 +37,17 @@ RSpec.describe Jaimini::CourseCertificates::User do
 
   context "invalid input" do
     context "missing key" do
-      let(:params) { { "first_name" => "Ivan", "last_name" => "Grozny" } }
+      let(:params) { { "last_name" => "Grozny" } }
       it_behaves_like "invalid instance setup"
     end
 
     context "nil key" do
-      let(:id) { nil }
+      let(:first_name) { nil }
       it_behaves_like "invalid instance setup"
     end
 
     context "key lower than expected" do
-      let(:id) { 0 }
-      it_behaves_like "invalid instance setup"
-    end
-
-    context "value of invalid format" do
-      let(:id) { "as" }
+      let(:first_name) { 0 }
       it_behaves_like "invalid instance setup"
     end
   end

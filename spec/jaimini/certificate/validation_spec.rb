@@ -5,10 +5,9 @@ RSpec.describe Jaimini::CourseCertificates::Certificate do
 
   subject { described_class.new(params) }
 
-  let(:id) { 5 }
   let(:uid) { "asdf1023847102374" }
   let(:issued_on) { Date.today }
-  let(:params) { { "id" => id, "uid" => uid, "issued_on" => issued_on } }
+  let(:params) { { "uid" => uid, "issued_on" => issued_on } }
 
 
   shared_examples "valid instance setup" do
@@ -29,11 +28,6 @@ RSpec.describe Jaimini::CourseCertificates::Certificate do
       it_behaves_like "valid instance setup"
     end
 
-    context "id with coersion" do
-      let(:id) { "2" }
-      it_behaves_like "valid instance setup"
-    end
-
     context "date with coersion" do
       let(:issued_on) { "2019-01-30" }
       it_behaves_like "valid instance setup"
@@ -43,12 +37,7 @@ RSpec.describe Jaimini::CourseCertificates::Certificate do
 
   context "invalid input" do
     context "missing key" do
-      let(:params) { { "uid" => uid, "issued_on" => issued_on } }
-      it_behaves_like "invalid instance setup"
-    end
-
-    context "nil key" do
-      let(:uid) { nil }
+      let(:params) { { "issued_on" => issued_on } }
       it_behaves_like "invalid instance setup"
     end
 
