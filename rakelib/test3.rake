@@ -8,14 +8,13 @@ task :test_3 do
     uid:       "1023847103471",
     url:       "https://jaimini.ru/certificates/1023847103471",
     course: {
-      slug: "blagokurs",
       title: "Курс астрологии «Предназначение»",
       url:   "https://jaimini.ru/courses/blagokurs"
     },
     user: {
       first_name: "Сергей",
-      last_name: "Педан",
-      gender: "male"
+      last_name:  "Педан",
+      gender:     "male"
     }
   }
 

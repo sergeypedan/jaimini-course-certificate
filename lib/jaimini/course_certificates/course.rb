@@ -5,24 +5,17 @@ module Jaimini
 
 		class Course < Jaimini::CourseCertificates::Record
 
-			# KEYS = %i[title slug]
-
 			SCHEMA = Dry::Schema.define do
-									# required(:id).value(:integer, gt?: 0)
 									required(:title).filled(:string)
-									required(:slug).filled(:string)
+									required(:url).filled(:string)
 								end
-
-      # KEYS.each do |key|
-      #   define_method(key) do @params[key] end
-      # end
 
       def title
         @params[:title].gsub("«", "„").gsub("»", "“")
       end
 
-      def slug
-        @params[:slug]
+      def url
+        @params[:url]
       end
 
 		end
