@@ -72,8 +72,9 @@ module Jaimini
 
         pdf.font_size FONT_SIZE[:large]
         pdf.text "«#{@course.title}»",
-                  align: :center, kerning: true
+                  align: :center, kerning: true, leading: -5
 
+        pdf.move_down 2.mm
         pdf.font_size FONT_SIZE[:normal]
         pdf.text "в школе ведической астрологии",
                   align: :center, kerning: true

@@ -8,7 +8,7 @@ task :test_3 do
     uid:       "1023847103471",
     url:       "https://jaimini.ru/certificates/1023847103471",
     course: {
-      title: "Курс астрологии «Предназначение»",
+      title: "Онлайн курс «Ведическая астрология с нуля»",
       url:   "https://jaimini.ru/courses/blagokurs"
     },
     user: {
