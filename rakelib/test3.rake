@@ -30,8 +30,7 @@ task :test_3 do
 
   builder = Jaimini::CourseCertificates::PDFBuilder.new(
     certificate: certificate,
-    pdf_meta: pdf_meta,
-    background: { image: "/Users/sergey/Sites/jaimini/site/public/uploads/manual/course-certificates/bg.jpg", dpi: 300 }
+    pdf_meta: pdf_meta
   )
 
   builder.save_as_file(path: "#{wd}/certificate.pdf")

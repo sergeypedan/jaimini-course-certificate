@@ -6,13 +6,14 @@ module Jaimini
 	module CourseCertificates
 		class PDFBuilder
 
-      include DryHelpers
+      # include DryHelpers
 
 			def initialize(certificate:, pdf_meta:, background: { dpi: 300 })
 				validate_initial!(certificate)
 				@certificate = Jaimini::CourseCertificates::Certificate.new(certificate)
 				@pdf_meta    = pdf_meta
 				@background  = background
+        @background[:image] = File.expand_path('../../../../assets/images/background.jpg', __FILE__) unless @background[:image]
         validate!
 			end
 

@@ -24,6 +24,12 @@ module Jaimini
         xsmall: 6
       }
 
+      FONTS = {
+        gentium: {
+          regular: File.expand_path('../../../../assets/fonts/GentiumPlus-R.ttf', __FILE__)
+        }
+      }
+
 
       def initialize(certificate:, meta:, bg_image: nil, bg_dpi: 300)
         @certificate = certificate
@@ -40,13 +46,13 @@ module Jaimini
           background:       @bg_image,
           background_scale: bg_scale,
           info:             @meta,
-          margin:           1.cm,
-          top_margin:       4.5.cm,
+          margin:           2.2.cm,
+          top_margin:       5.cm,
           page_layout:      :portrait,
           page_size:        "A5"
         )
 
-        pdf.font File.expand_path('../../../../assets/fonts/GentiumPlus-R.ttf', __FILE__)
+        pdf.font FONTS[:gentium][:regular]
 
         pdf.font_size 26
         pdf.text "Сертификат",
@@ -83,15 +89,15 @@ module Jaimini
         pdf.text "<link href=\"https://jaimini.ru\">Jaimini</a>",
                   align: :center, kerning: true, inline_format: true
 
-        pdf.move_down 2.cm
-        pdf.font_size FONT_SIZE[:small]
+        pdf.move_down 7.mm
+        pdf.font_size FONT_SIZE[:normal]
         pdf.text "Сертификат выдан #{l_date}",
                   align: :center, kerning: true
 
-        pdf.move_down 5.mm
+        pdf.move_down 3.mm
         pdf.font_size FONT_SIZE[:xsmall]
         pdf.line_width = 0.3
-        pdf.text "Онлайн-версия сертификата находится по адресу\n<color rgb=\"#d5251e\"><link href=\"#{@certificate.url}\">#{@certificate.url}</link></color>",
+        pdf.text "Онлайн-версия сертификата находится по адресу\n<link href=\"#{@certificate.url}\">#{@certificate.url}</link>",
                   align: :center, kerning: true, inline_format: true
 
         pdf.encrypt_document(owner_password: :random, permissions: PERMISSIONS)
