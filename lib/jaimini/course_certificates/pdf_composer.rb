@@ -45,42 +45,53 @@ module Jaimini
           page_layout:      :portrait,
           page_size:        "A5"
         )
-        pdf.font("assets/fonts/GentiumPlus-R.ttf")
+
+        pdf.font File.expand_path('../../../../assets/fonts/GentiumPlus-R.ttf', __FILE__)
 
         pdf.font_size 26
-        pdf.text "Сертификат", align: :center, kerning: true
+        pdf.text "Сертификат",
+                  align: :center, kerning: true
 
         pdf.font_size 10
-        pdf.text "№ #{@certificate.uid}", align: :center, kerning: true
+        pdf.text "№ #{@certificate.uid}",
+                  align: :center, kerning: true
 
         pdf.move_down 5.mm
         pdf.font_size FONT_SIZE[:normal]
-        pdf.text "удостоверяет, что", align: :center, kerning: true
+        pdf.text "удостоверяет, что",
+                  align: :center, kerning: true
 
         pdf.font_size FONT_SIZE[:xlarge]
-        pdf.text "#{@user.first_name} #{@user.last_name}", align: :center, kerning: true
+        pdf.text "#{@user.first_name} #{@user.last_name}",
+                  align: :center, kerning: true
 
         pdf.move_down 3.mm
         pdf.font_size FONT_SIZE[:normal]
-        pdf.text "успешно #{@user.gender == "male" ? "прошёл" : "прошла"} курс", align: :center, kerning: true
+        pdf.text "успешно #{@user.gender == "male" ? "прошёл" : "прошла"} курс",
+                  align: :center, kerning: true
 
         pdf.font_size FONT_SIZE[:large]
-        pdf.text "«#{@course.title}»", align: :center, kerning: true
+        pdf.text "«#{@course.title}»",
+                  align: :center, kerning: true
 
         pdf.font_size FONT_SIZE[:normal]
-        pdf.text "в школе ведической астрологии", align: :center, kerning: true
+        pdf.text "в школе ведической астрологии",
+                  align: :center, kerning: true
 
         pdf.font_size FONT_SIZE[:large]
-        pdf.text "<link href=\"https://jaimini.ru\">Jaimini</a>", inline_format: true, align: :center, kerning: true
+        pdf.text "<link href=\"https://jaimini.ru\">Jaimini</a>",
+                  align: :center, kerning: true, inline_format: true
 
         pdf.move_down 2.cm
         pdf.font_size FONT_SIZE[:small]
-        pdf.text "Сертификат выдан #{l_date}", align: :center, kerning: true
+        pdf.text "Сертификат выдан #{l_date}",
+                  align: :center, kerning: true
 
         pdf.move_down 5.mm
         pdf.font_size FONT_SIZE[:xsmall]
         pdf.line_width = 0.3
-        pdf.text "Онлайн-версия сертификата находится по адресу\n<color rgb=\"#d5251e\"><link href=\"#{@certificate.url}\">#{@certificate.url}</link></color>", inline_format: true, align: :center, kerning: true
+        pdf.text "Онлайн-версия сертификата находится по адресу\n<color rgb=\"#d5251e\"><link href=\"#{@certificate.url}\">#{@certificate.url}</link></color>",
+                  align: :center, kerning: true, inline_format: true
 
         pdf.encrypt_document(owner_password: :random, permissions: PERMISSIONS)
 
