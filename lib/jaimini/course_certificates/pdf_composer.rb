@@ -46,18 +46,15 @@ module Jaimini
           background:       @bg_image,
           background_scale: bg_scale,
           info:             @meta,
-          margin:           2.2.cm,
-          top_margin:       5.cm,
-          page_layout:      :portrait,
+          margin:           3.cm,
+          top_margin:       2.2.cm,
+          page_layout:      :landscape,
           page_size:        "A5"
         )
 
         pdf.font FONTS[:gentium][:regular]
 
-        pdf.font_size 26
-        pdf.text "Сертификат",
-                  align: :center, kerning: true
-
+        pdf.move_down 2.0.cm
         pdf.font_size 10
         pdf.text "№ #{@certificate.uid}",
                   align: :center, kerning: true
@@ -67,26 +64,32 @@ module Jaimini
         pdf.text "удостоверяет, что",
                   align: :center, kerning: true
 
-        pdf.font_size FONT_SIZE[:xlarge]
+        pdf.move_up 3.mm
+        pdf.font_size 35
         pdf.text "#{@user.first_name} #{@user.last_name}",
-                  align: :center, kerning: true
+                  align: :center, kerning: true, color: "5575BF", leading: -23
 
-        pdf.move_down 3.mm
+        # pdf.move_down 10.mm
+        # pdf.font_size FONT_SIZE[:normal]
+        # pdf.text "успешно #{@user.gender == "male" ? "прошёл" : "прошла"} курс",
+        #           align: :center, kerning: true
+
+        # pdf.font_size FONT_SIZE[:large]
+        # pdf.text "«#{@course.title}»",
+        #           align: :center, kerning: true, leading: -5
+
+        # pdf.move_down 2.mm
+        # pdf.font_size FONT_SIZE[:normal]
+        # pdf.text "в школе ведической астрологии",
+        #           align: :center, kerning: true
+
+        # pdf.font_size FONT_SIZE[:large]
+        # pdf.text "<link href=\"https://jaimini.ru\">Jaimini</a>",
+        #           align: :center, kerning: true, inline_format: true
+
+        pdf.move_down 10.mm
         pdf.font_size FONT_SIZE[:normal]
-        pdf.text "успешно #{@user.gender == "male" ? "прошёл" : "прошла"} курс",
-                  align: :center, kerning: true
-
-        pdf.font_size FONT_SIZE[:large]
-        pdf.text "«#{@course.title}»",
-                  align: :center, kerning: true, leading: -5
-
-        pdf.move_down 2.mm
-        pdf.font_size FONT_SIZE[:normal]
-        pdf.text "в школе ведической астрологии",
-                  align: :center, kerning: true
-
-        pdf.font_size FONT_SIZE[:large]
-        pdf.text "<link href=\"https://jaimini.ru\">Jaimini</a>",
+        pdf.text "успешно #{@user.gender == "male" ? "прошёл" : "прошла"} курс «#{@course.title}» в школе ведической астрологии <link href=\"https://jaimini.ru\">Jaimini</a>",
                   align: :center, kerning: true, inline_format: true
 
         pdf.move_down 7.mm

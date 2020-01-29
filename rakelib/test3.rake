@@ -12,8 +12,8 @@ task :test_3 do
       url:   "https://jaimini.ru/courses/blagokurs"
     },
     user: {
-      first_name: "Сергей",
-      last_name:  "Педан",
+      first_name: "Арсений",
+      last_name:  "Константинопольский",
       gender:     "male"
     }
   }
