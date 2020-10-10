@@ -1,4 +1,3 @@
-# require "pry"
 require "jaimini/course_certificates/user"
 
 RSpec.describe Jaimini::CourseCertificates::Certificate do

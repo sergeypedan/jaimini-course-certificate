@@ -1,8 +1,6 @@
 desc "Tests PDF creation"
 
 task :test_1 do
-  require "pry"
-
   wd = "/Users/sergey/Downloads"
 
   certificate = { uid: "1023847103471", issued_on: Date.today }
